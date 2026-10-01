@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # apliicaciones del proyecto
+    'usuarios',
+    'pedidos',
+]
+
+
+
+#  Validadores de Contraseña con las reglas de negocio solicitadas:
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'usuarios.validators.ReglaContrasenaSaboresValidator'},
+    {'NAME': 'usuarios.validators.NoContieneNombreValidator'},
 ]
 
 MIDDLEWARE = [
@@ -54,10 +65,11 @@ ROOT_URLCONF = 'sabores_core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # Directorio de platillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -79,22 +91,20 @@ DATABASES = {
     }
 }
 
+# Configurar Modelo de Usuario Personalizado:
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
+
 AUTH_PASSWORD_VALIDATORS = [
+    #  Validadores de Contraseña con las reglas de negocio solicitadas:
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'usuarios.validators.ReglaContrasenaSaboresValidator'
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'usuarios.validators.NoContieneNombreValidator'
     },
 ]
 
@@ -104,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-cl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Amenerica/Santiago'
 
 USE_I18N = True
 
