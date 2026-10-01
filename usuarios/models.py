@@ -88,5 +88,3 @@ class DireccionCliente(models.model):
         depto = f" - depto {self.departamento_oficina}" if self.departamento_oficina else ""
         return f"{self.calle_y_numero}{depto}, {self.comuna}"
     
-    
-    
