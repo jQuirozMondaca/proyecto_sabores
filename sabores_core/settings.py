@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-s^9o3g5c6f=n#i*90m-mr$ccd&7efvd*5a!%n+-eha)eemc_2%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'testserver']
 
 
 # Application definition
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'sabores_core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], # Directorio de platillas
+        'DIRS': [BASE_DIR / 'sabores_core' / 'templates'],  # Directorio de plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,6 +93,8 @@ DATABASES = {
 
 # Configurar Modelo de Usuario Personalizado:
 AUTH_USER_MODEL = 'usuarios.Usuario'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'menu_semanal'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -114,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-cl'
 
-TIME_ZONE = 'Amenerica/Santiago'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -129,7 +131,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "sabores_core" / "static",
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

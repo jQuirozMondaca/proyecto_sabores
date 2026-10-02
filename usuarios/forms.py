@@ -33,11 +33,13 @@ class RegistroClienteForm(forms.ModelForm):
             'empresa_convenio' : forms.Select(attrs={'class' : 'form-select'}),
         }
 
-    def Clean_password(self):
+    def clean_password(self):
         pwd = self.cleaned_data.get('password')
         nombre = self.cleaned_data.get('nombre')
 
-        # Aplicator los validadores de seguiridad
+        if not pwd:
+            return pwd
+
         validador_regla = ReglaContrasenaSaboresValidator()
         validador_regla.validate(pwd)
 
@@ -69,7 +71,7 @@ class RegistroClienteForm(forms.ModelForm):
             )
         return user
 
-class Loginform(forms.Form):
+class LoginForm(forms.Form):
     email = forms.EmailField(
         label="Correo Electrónico",
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'correo@dominio.cl'}) 
@@ -99,3 +101,6 @@ class DireccionClienteForm(forms.ModelForm):
             'departamento_oficina': forms.TextInput(attrs={'class': 'form-control'}),
             'comuna': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+DireccionForm = DireccionClienteForm
